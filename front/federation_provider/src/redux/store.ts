@@ -19,7 +19,7 @@ type RootState = ReturnType<typeof Store.getState>
 type AppDispatch = typeof Store.dispatch
 const useAppDispatch = () => useDispatch<AppDispatch>()
 
-export { Store, authSlice, messageSlice, api, useAppDispatch, sendMessage }
+export { Store, authSlice, messageSlice, api, sendMessage }
 
 export type { RootState, AppDispatch }
 export default Store

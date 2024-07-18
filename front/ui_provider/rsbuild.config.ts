@@ -8,13 +8,13 @@ import { dependencies } from './package.json'
 
 export default defineConfig({
   server: {
-    port: 3000,
+    port: 3001,
   },
   dev: {
     hmr: false,
     liveReload: false,
     // It is necessary to configure assetPrefix, and in the production environment, you need to configure output.assetPrefix
-    assetPrefix: 'http://localhost:3000',
+    assetPrefix: 'http://localhost:3001',
   },
   tools: {
     rspack: (config, { appendPlugins }) => {
@@ -22,13 +22,16 @@ export default defineConfig({
       config.output.publicPath = 'auto'
       appendPlugins([
         new ModuleFederationPlugin({
-          name: 'federation_provider',
+          name: 'ui_provider',
           exposes: {
-            './button': './src/button.tsx',
-            './store': './src/redux/store.ts',
-            './content': './src/components/Content.tsx',
+            './layout': './src/components/Layout.tsx',
+            // './store': './src/redux/store.ts',
+            // './content': './src/components/Content.tsx',
           },
-
+          remotes: {
+            federation_provider:
+              'federation_provider@http://localhost:3000/mf-manifest.json',
+          },
           shared: {
             react: {
               singleton: true,
@@ -58,7 +61,6 @@ export default defineConfig({
             'react-router-dom': {
               singleton: true,
               eager: true,
-              requiredVersion: dependencies['react-router-dom'],
             },
             immer: {
               singleton: true,

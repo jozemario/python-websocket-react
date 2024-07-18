@@ -31,3 +31,12 @@ Through the above process, you have completed the export of a component from a '
 pnpm add tailwindcss -D
 
 
+Creating a ui Producer
+pnpm create rsbuild@latest
+? Input target folder -> ui_provider
+? Select framework -> React
+? Select language -> TypeScript
+cd ui_provider
+pnpm add @module-federation/enhanced
+pnpm add tailwindcss -D
+pnpm add antd redux react-redux @reduxjs/toolkit @ant-design/icons 

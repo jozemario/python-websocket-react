@@ -178,7 +178,7 @@ export default function Dashboard({ apis, reducers, thunks }: DashboardProps) {
         ref={sidebarRef}
         className={`bg-gray-800 text-white w-56 min-h-screen overflow-y-auto transition-transform transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } ease-in-out duration-300 absolute lg:relative z-20`}
+        } ease-in-out duration-300 absolute z-20`}
       >
         <div className="p-4">
           <h3 className="text-2xl font-semibold">Sidebar</h3>
