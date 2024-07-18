@@ -12,8 +12,7 @@ import { useSelector } from 'react-redux'
 
 function Home() {
   return (
-    <div>
-      hello sub2 home page
+    <>
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -22,7 +21,8 @@ function Home() {
           <Link to="/detail">Detail</Link>
         </li>
       </ul>
-    </div>
+      <div>hello sub2 home page</div>
+    </>
   )
 }
 
