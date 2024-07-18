@@ -25,6 +25,7 @@ export default defineConfig({
           name: 'ui_provider',
           exposes: {
             './layout': './src/components/Layout.tsx',
+            './example': './src/components/Example.tsx',
             // './store': './src/redux/store.ts',
             // './content': './src/components/Content.tsx',
           },
