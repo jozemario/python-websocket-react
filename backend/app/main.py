@@ -34,7 +34,7 @@ connected_users: Dict[str, WebSocket] = {}
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React app's address
+    allow_origins=["*"],  # React app's address
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -91,14 +91,16 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 @app.post("/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    print(form_data.username, form_data.password)
     user_dict = users_db.get(form_data.username)
+    print(user_dict)
     if not user_dict:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
     user = User(**user_dict)
     hashed_password = fake_hash_password(form_data.password)
     if not hashed_password == user.hashed_password:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
-    return {"access_token": user.username, "token_type": "bearer"}
+    return {"access_token": user.username, "token_type": "bearer", "username": user.username}
 
 
 @app.get("/verify_token")
