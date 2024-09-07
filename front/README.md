@@ -1,4 +1,4 @@
-
+```
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 Creating a Producer
 pnpm create rsbuild@latest
@@ -40,3 +40,6 @@ cd ui_provider
 pnpm add @module-federation/enhanced
 pnpm add tailwindcss -D
 pnpm add antd redux react-redux @reduxjs/toolkit @ant-design/icons 
+pnpm add @tailwindcss/typography @tailwindcss/forms @tailwindcss/aspect-ratio
+pnpm add @headlessui/react @heroicons/react
+```

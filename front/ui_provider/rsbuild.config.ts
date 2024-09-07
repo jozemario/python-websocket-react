@@ -26,6 +26,7 @@ export default defineConfig({
           exposes: {
             './layout': './src/components/Layout.tsx',
             './example': './src/components/Example.tsx',
+            './shell': './src/components/ShellBasic.tsx',
             // './store': './src/redux/store.ts',
             // './content': './src/components/Content.tsx',
           },

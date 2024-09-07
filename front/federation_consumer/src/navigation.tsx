@@ -33,6 +33,11 @@ function Navigation() {
       key: '/remote2',
       icon: <GroupOutlined />,
     },
+    {
+      label: <Link to="/remote3">Remote3</Link>,
+      key: '/remote3',
+      icon: <SettingOutlined />,
+    },
   ]
 
   const onClick: MenuProps['onClick'] = (e) => {
