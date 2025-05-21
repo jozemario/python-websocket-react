@@ -19,7 +19,7 @@ export interface LoginRequest {
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8000',
+    baseUrl: 'https://k3s-websocket.mghcloud.com', // Replace with your API base URL
   }) as BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError>,
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginRequest>({
