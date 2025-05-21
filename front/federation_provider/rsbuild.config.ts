@@ -6,6 +6,8 @@ import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack'
 // @ts-ignore
 import { dependencies } from './package.json'
 
+const isProd = process.env.NODE_ENV === 'production'
+
 export default defineConfig({
   server: {
     port: 3000,
@@ -15,6 +17,10 @@ export default defineConfig({
     liveReload: false,
     // It is necessary to configure assetPrefix, and in the production environment, you need to configure output.assetPrefix
     assetPrefix: 'http://localhost:3000',
+  },
+  output: {
+    // It is necessary to configure assetPrefix, and in the production environment, you need to configure output.assetPrefix
+    assetPrefix: isProd ? '/federation_provider' : 'http://localhost:3000',
   },
   tools: {
     rspack: (config, { appendPlugins }) => {
@@ -28,7 +34,6 @@ export default defineConfig({
             './store': './src/redux/store.ts',
             './content': './src/components/Content.tsx',
           },
-
           shared: {
             react: {
               singleton: true,

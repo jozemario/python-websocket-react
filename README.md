@@ -108,3 +108,12 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Build docker image
+```bash
+# Backend
+buildctl --addr tcp://buildkit.mghcloud.com:59161 --tlscacert /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/ca.pem --tlscert /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/cert.pem --tlskey /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/key.pem build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=docker.mghcloud.com/flask/k3s-websocket,push=true,registry.insecure=true --opt platform=linux/amd64
+# Frontend
+buildctl --addr tcp://buildkit.mghcloud.com:59161 --tlscacert /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/ca.pem --tlscert /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/cert.pem --tlskey /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/key.pem build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=docker.mghcloud.com/flask/k3s-websocket-ui,push=true,registry.insecure=true --opt platform=linux/amd64
+
+```

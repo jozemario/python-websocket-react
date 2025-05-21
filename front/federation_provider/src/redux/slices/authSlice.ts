@@ -1,24 +1,24 @@
 // Auth Slice
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, Slice } from '@reduxjs/toolkit'
 import { api } from '../apis/mainApi.ts'
 
-interface AuthState {
+export interface AuthState {
   isAuthenticated: boolean
-  token: string | any
-  user: { username: string } | any
-  error: string | any
+  token: string | null
+  user: { username: string } | null
+  error: string | null
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   token: sessionStorage.getItem('token') || null,
-  // @ts-ignore
-  user: JSON.parse(sessionStorage.getItem('user')) || null,
+  user: JSON.parse(sessionStorage.getItem('user') || 'null'),
   error: null,
 }
-const authSlice = createSlice({
+
+export const authSlice: Slice<AuthState> = createSlice({
   name: 'auth',
-  initialState: initialState,
+  initialState,
   reducers: {
     logout: (state) => {
       sessionStorage.removeItem('token')
@@ -30,9 +30,7 @@ const authSlice = createSlice({
     },
     checkStoredAuth: (state) => {
       const token = sessionStorage.getItem('token')
-      // @ts-ignore
-
-      const user = JSON.parse(sessionStorage.getItem('user'))
+      const user = JSON.parse(sessionStorage.getItem('user') || 'null')
       if (token && user) {
         state.token = token
         state.user = user
@@ -60,7 +58,5 @@ const authSlice = createSlice({
 })
 
 export const { checkStoredAuth, logout } = authSlice.actions
-
-export { authSlice }
 
 export default authSlice
