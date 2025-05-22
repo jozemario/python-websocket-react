@@ -17,7 +17,8 @@ RUN apk add --no-cache \
 # install pnpm
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
+#RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 # Copy package files and source files for all apps
 COPY federation_consumer/package.json federation_consumer/pnpm-lock.yaml /app/federation_consumer/
 COPY federation_consumer/src /app/federation_consumer/src
@@ -34,20 +35,27 @@ COPY ui_provider/src /app/ui_provider/src
 COPY ui_provider/eslint.config.mjs /app/ui_provider/
 COPY ui_provider/tsconfig.json ui_provider/rsbuild.config.ts ui_provider/tailwind.config.js ui_provider/postcss.config.cjs /app/ui_provider/
 
+ENV DISABLE_OPENCOLLECTIVE=true
 # Install dependencies and build all apps
-RUN pnpm add -g @rsbuild/core @rspack/cli
+#RUN pnpm add -g @rsbuild/core @rspack/cli
 
 WORKDIR /app/ui_provider
-RUN pnpm install
-RUN pnpm run build
+#RUN pnpm install
+#RUN pnpm run build
+RUN yarn install --ignore-engines
+RUN yarn run build
 
 WORKDIR /app/federation_provider
-RUN pnpm install
-RUN pnpm run build
+#RUN pnpm install
+#RUN pnpm run build
+RUN yarn install --ignore-engines
+RUN yarn run build
 
 WORKDIR /app/federation_consumer
-RUN pnpm install
-RUN pnpm run build
+#RUN pnpm install
+#RUN pnpm run build
+RUN yarn install --ignore-engines
+RUN yarn run build
 
 FROM nginx:alpine AS runtime
 

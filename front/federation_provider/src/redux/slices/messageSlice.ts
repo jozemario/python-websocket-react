@@ -38,7 +38,9 @@ export const sendMessage: AsyncThunk<
     try {
       console.log('Sending message:', message)
       websocket.send(JSON.stringify({ message }))
-      dispatch(messageSlice.actions.sendMessageSuccess())
+      dispatch(
+        messageSlice.actions.sendMessageSuccess('Message sent successfully.'),
+      )
       return message
     } catch (error) {
       dispatch(
