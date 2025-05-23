@@ -59,7 +59,7 @@ export default function Dashboard({ apis, reducers, thunks }: DashboardProps) {
 
   const connectWebSocket = () => {
     // @ts-ignore
-    ws.current = new WebSocket(`ws://k3s-websocket.mghcloud.com/ws`)
+    ws.current = new WebSocket(`wss://k3s-websocket.mghcloud.com/ws`)
 
     // @ts-ignore
     ws.current.onopen = (con) => {
