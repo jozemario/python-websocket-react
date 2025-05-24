@@ -28,22 +28,26 @@ websocket_webapp/
 ## Backend Setup
 
 1. Navigate to the backend directory:
+
    ```
    cd websocket_webapp/backend
    ```
 
 2. Create a virtual environment (optional but recommended):
+
    ```
    python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
 
 3. Install the required packages:
+
    ```
    pip install -r requirements.txt
    ```
 
 4. Run the FastAPI server:
+
    ```
    uvicorn app.main:app --reload
    ```
@@ -53,16 +57,19 @@ websocket_webapp/
 ## Frontend Setup
 
 1. Navigate to the frontend directory:
+
    ```
    cd websocket_webapp/frontend
    ```
 
 2. Install the required npm packages:
+
    ```
    npm install
    ```
 
 3. Start the React development server:
+
    ```
    npm start
    ```
@@ -110,9 +117,14 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ## Build docker image
+
 ```bash
 # Backend
 docker buildx build --platform linux/amd64 . -t k3s-websocket
+docker tag k3s-websocket docker.mghcloud.com/flask/k3s-websocket
+docker push docker.mghcloud.com/flask/k3s-websocket
+
+docker buildx build --platform linux/amd64  -f "Dockerfile.proxy" . -t k3s-websocket
 
 buildctl --addr tcp://buildkit.mghcloud.com:59161 --tlscacert /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/ca.pem --tlscert /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/cert.pem --tlskey /Users/jozemario/Projects/gitops/tf-planner/cd/buildkit/.certs/client/key.pem build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=docker.mghcloud.com/flask/k3s-websocket,push=true,registry.insecure=true --opt platform=linux/amd64
 # Frontend
